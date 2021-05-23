@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <p2>Здравствуйте, {{ name }}. Новые объявления на </p2>
+        <a href="http://ad-b.test.com:8000/ads/"> портале</a>
+        <hr>
+        <table>
+            <tr>
+                <td>
+                    Заголовок
+                </td>
+                <td>
+                    Дата
+                </td>
+            </tr>
+        {% for ad in ads %}
+            <tr>
+                <td>
+                    <a href="http://ad-b.test.com:8000{% url 'ad_detail' ad.id %}">{{ ad.title }}</a>
+                </td>
+                <td>
+                    {{ ad.creation_datetime|date:'d-M-Y' }}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    </body>
+</html>

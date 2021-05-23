@@ -1,0 +1,57 @@
+{% extends 'default.html' %}
+
+{% block title %} Responses {% endblock title %}
+
+{% block content %}
+    <h1>Отклики</h1>
+    <p1>Количество откликов {{ filter.qs | length }}</p1>
+    <hr>
+    <form method="GET">
+        {{ filter.form }}
+        <input type="submit" value="Найти">
+    </form>
+    {% if filter.qs %} 
+        <table>
+            <tr>
+                <td>
+                    Заголовок объявления
+                </td>                
+                <td>
+                    Автор отклика
+                </td>
+                <td>
+                    Дата
+                </td>
+                <td>
+                    Статус
+                </td>               
+                <td>
+                    Обзор
+                </td>
+            </tr>
+        {% for response in filter.qs %}
+            <tr>
+                <td>
+                    <a href="{% url 'ad_detail' response.ad.id %}">{{ response.ad.title }}</a>
+                </td>
+                <td>
+                    {{ response.author.user }}
+                </td>
+                <td>
+                    {{ response.creation_datetime|date:'d-M-Y' }}
+                </td>
+                <td>
+                    {{ response.get_status }}
+                </td>                
+                <td>
+                    <a href="{% url 'response_detail' response.id %}"><u>{{ response.content|truncatechars:50 }}</u></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p2>Нет откликов с заданными параметрами.</p2>
+    {% endif %}
+    <hr>    
+    <a href="/responses/">Отклики</a>
+{% endblock content %}

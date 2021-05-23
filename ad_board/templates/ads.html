@@ -1,0 +1,73 @@
+{% extends 'default.html' %}
+
+{% block title %}Ads{% endblock title %}
+
+{% block content %}
+    <h1>Все объявления</h1>
+    <p1>Количество объявлений на странице {{ ads|length }}</p1>
+    <hr>
+    {% if ads %} 
+        <table>
+            <tr>
+                <td>
+                    Заголовок
+                </td>
+                <td>
+                    Автор
+                </td>
+                <td width="10%">
+                    Дата
+                </td>
+                <td>
+                    Категория
+                </td>
+            </tr>
+        {% for ad in ads %}
+            <tr>
+                <td>
+                    <a href="{% url 'ad_detail' ad.id %}">{{ ad.title }}</a>
+                </td>
+                <td>
+                    {{ ad.author.user }}
+                </td>
+                <td  width="10%">
+                    {{ ad.creation_datetime|date:'d-M-Y' }}
+                </td>
+                <td>
+                    {{ ad.category }}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        {% if is_paginated %}
+ 
+            {% if page_obj.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+            {% endif %}
+ 
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a>{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+ 
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">>>></a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+
+        {% endif %} 
+
+    {% else %}
+        <h2>Объявлений нет!</h2>
+    {% endif %}
+
+    <hr>
+    <a href="{% url 'ad_add' %}">Добавить объявление</a>
+    <br>
+    <hr>
+
+{% endblock content %}

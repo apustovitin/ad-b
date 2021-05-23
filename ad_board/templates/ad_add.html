@@ -1,0 +1,19 @@
+{% extends 'default.html' %}
+
+{% block title %}Ads{% endblock title %}
+
+{% block content %}
+    <h3>Параметры объявления</h3>    
+    {{ form.media }}
+    <div class="row form-error">
+        <div class="column" id="content">
+            <form  method="post" action='' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p  }}
+                <input class="button" type="submit" value="Сохранить">
+            </form>
+        </div>
+    </div>
+    <hr>
+    <a href="/ads/">Объявления</a>
+{% endblock content %}

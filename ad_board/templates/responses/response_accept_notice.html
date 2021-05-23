@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <p2>Здравствуйте, {{ name }}. На объявление </p2>
+        <a href="http://ad-b.test.com:8000{% url 'ad_detail' ad.id %}">{{ ad.title }}</a>
+        <p2>принят ваш отклик. </p2>
+        <hr>
+        <a href="http://ad-b.test.com:8000{% url 'response_detail' response.id %}">{{ response.content|truncatechars:50 }}</a>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+{% extends 'default.html' %} 
+
+{% block title %}Responses{% endblock title %}
+
+{% block content %}
+    <h2>Вы действительно хотите удалить этот отклик?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="подтвердить">
+    </form>
+    <hr>
+    <h3>{{ response.author.user }}</h3>
+    <br>
+    <p2>{{ response.creation_datetime|date:'d-M-Y h:m' }}</p2>
+    <hr>
+    <div> {{ response.content }} </div>
+    <hr>
+    <a href="/responses/">Отклики</a>
+{% endblock content %} 

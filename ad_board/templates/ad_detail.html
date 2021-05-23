@@ -1,0 +1,20 @@
+{% extends 'default.html' %}
+
+{% block title %}Ad{% endblock title %}
+
+{% block content %}
+    <h3>{{ ad_detail.title }}</h3>
+    <br>
+    <p2>{{ ad_detail.creation_datetime|date:'d-M-Y h:m' }}</p2>
+    <hr>
+    <div> {{ ad_detail.content | safe }} </div>
+    <hr>
+    {% if is_author %}
+        <a href="{% url 'ad_update' ad_detail.id %}"><u>Редактировать    </u></a>
+        <a href="{% url 'ad_delete' ad_detail.id %}"><u>Удалить    </u></a>
+        <hr>
+    {% endif %}
+    <a href="{% url 'response_add' ad_detail.id %}"><u>Оставить отклик</u></a>
+    <hr>
+    <a href="/ads/"><u>Объявления</u></a>
+{% endblock content %}

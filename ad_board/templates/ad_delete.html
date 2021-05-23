@@ -1,0 +1,19 @@
+{% extends 'default.html' %} 
+
+{% block title %}Ads{% endblock title %}
+
+{% block content %}
+    <h2>Вы действительно хотите удалить это объявление?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="подтвердить">
+    </form>
+    <hr>
+    <h3>{{ ad.title }}</h3>
+    <br>
+    <p2>{{ ad.creation_datetime|date:'d-M-Y h:m' }}</p2>
+    <hr>
+    <div> {{ ad.content | safe }} </div>
+    <hr>
+    <a href="/ads/">Объявления</a>
+{% endblock content %} 

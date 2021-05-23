@@ -1,0 +1,19 @@
+{% extends 'default.html' %}
+
+{% block title %}Responses{% endblock title %}
+
+{% block content %}
+    <hr>
+    <p2>{{ response_detail.creation_datetime|date:'d-M-Y h:m' }}</p2>
+    <hr>
+    <div> {{ response_detail.content }} </div>
+    <hr>
+    {% if is_ad_author and response_detail.status == 'NEW' %}
+        <a href="{% url 'response_accept' response_detail.id %}"><u>Принять    </u></a>
+    {% endif %}
+    {% if is_ad_author %}
+        <a href="{% url 'response_delete' response_detail.id %}"><u>Удалить    </u></a>
+        <hr>
+    {% endif %}
+    <a href="/responses/"><u>Отклики</u></a>
+{% endblock content %}
